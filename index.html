@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorry My Love ❤️</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffb6b9, #ffd3b6, #e6b3ff, #b39ddb);
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* Floating Hearts */
+
+      .heart {
+        position: absolute;
+        color: white;
+        opacity: 0.7;
+        animation: float 8s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) scale(0.5);
+        }
+
+        100% {
+          transform: translateY(-120vh) scale(1.5);
+        }
+      }
+
+      /* Cute Stickers */
+
+      .sticker {
+        position: absolute;
+        font-size: clamp(28px, 5vw, 55px);
+        animation: bounce 3s infinite ease-in-out;
+        z-index: 1;
+        user-select: none;
+      }
+
+      .s1 {
+        top: 8%;
+        left: 4%;
+      }
+      .s2 {
+        top: 12%;
+        right: 5%;
+      }
+      .s3 {
+        bottom: 12%;
+        left: 8%;
+      }
+      .s4 {
+        bottom: 14%;
+        right: 10%;
+      }
+      .s5 {
+        top: 50%;
+        left: 24%;
+      }
+      .s6 {
+        top: 55%;
+        right: 28%;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(-5deg);
+        }
+
+        50% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+      }
+
+      /* Main Container */
+
+      .container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+      }
+
+      /* Envelope */
+
+      .envelope {
+        position: relative;
+        width: min(85vw, 420px);
+        aspect-ratio: 16/11;
+        cursor: pointer;
+      }
+
+      .base {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff5e78;
+        border-radius: 14px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      /* Triangle Flap */
+
+      .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ff7f96;
+        clip-path: polygon(0 0, 50% 58%, 100% 0);
+        transform-origin: top;
+        transition: 1s ease;
+        z-index: 4;
+      }
+
+      /* Rounded Image */
+
+      .photo-frame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid white;
+        background: white;
+        z-index: 6;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Click Text */
+
+      .click-text {
+        margin-top: 28px;
+        color: white;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-family: "Dancing Script", cursive;
+        font-weight: 700;
+        animation: blink 1.5s infinite;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Letter */
+
+      .message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 120%);
+        width: min(94vw, 1200px);
+        height: min(88vh, 900px);
+        background: white;
+        border-radius: 26px;
+        padding: clamp(22px, 4vw, 55px);
+        overflow-y: auto;
+        transition: 1s ease;
+        z-index: 20;
+        text-align: center;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Open State */
+
+      .open .flap {
+        transform: rotateX(180deg);
+      }
+
+      .open .message {
+        transform: translate(-50%, -50%);
+      }
+
+      /* Close Button */
+
+      .close-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        background: #ff4d6d;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .close-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* Letter Stickers */
+
+      .letter-stickers {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        font-size: clamp(28px, 5vw, 46px);
+      }
+
+      /* Heading */
+
+      .message h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(3rem, 7vw, 5rem);
+        color: #ff4d6d;
+        margin-bottom: 15px;
+        margin-top: 8px;
+      }
+
+      /* Letter Text */
+
+      .message p {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        line-height: 1.8;
+        color: #444;
+        max-width: 1000px;
+        margin: auto;
+        font-weight: 500;
+      }
+
+      /* Ending */
+
+      .love {
+        margin-top: 35px;
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: #ff4d6d;
+        font-weight: 700;
+      }
+
+      /* Mobile */
+
+      @media (max-width: 480px) {
+        .message {
+          width: 95vw;
+          height: 86vh;
+          border-radius: 20px;
+          padding: 22px;
+        }
+
+        .message p {
+          text-align: left;
+        }
+
+        .photo-frame {
+          width: 72px;
+          height: 72px;
+        }
+
+        .close-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+        }
+
+        .s5,
+        .s6 {
+          display: none;
+        }
+      }
+
+      .music-btn {
+        margin-top: 18px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(10px);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .music-btn:hover {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.35);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Floating Hearts -->
+
+    <div class="heart" style="left: 5%; animation-delay: 0s; font-size: 22px">
+      ❤️
+    </div>
+    <div class="heart" style="left: 15%; animation-delay: 2s; font-size: 28px">
+      💖
+    </div>
+    <div class="heart" style="left: 30%; animation-delay: 4s; font-size: 18px">
+      💕
+    </div>
+    <div class="heart" style="left: 50%; animation-delay: 1s; font-size: 24px">
+      💞
+    </div>
+    <div class="heart" style="left: 70%; animation-delay: 3s; font-size: 20px">
+      💗
+    </div>
+    <div class="heart" style="left: 88%; animation-delay: 5s; font-size: 28px">
+      ❤️
+    </div>
+
+    <!-- Stickers -->
+
+    <div class="sticker s1">🫶</div>
+    <div class="sticker s2">🐼</div>
+    <div class="sticker s3">🐻</div>
+    <div class="sticker s4">😔</div>
+    <div class="sticker s5">💕</div>
+    <div class="sticker s6">💞</div>
+
+    <!-- Main Container -->
+
+    <div class="container" id="container">
+      <!-- Envelope -->
+
+      <div class="envelope" onclick="openLetter()">
+        <div class="base"></div>
+
+        <div class="flap"></div>
+
+        <!-- Add Your Image Here -->
+        <div class="photo-frame">
+          <img src="./1.jpeg" alt="Her Picture" />
+        </div>
+      </div>
+
+      <div class="click-text">Click the Envelope 💌</div>
+      <button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+
+      <!-- Letter -->
+
+      <div class="message">
+        <button class="close-btn" onclick="closeLetter()">✕</button>
+
+        <div class="letter-stickers">🥺 💖 😔 💌</div>
+
+        <h1>I’m Sorry ❤️</h1>
+
+        <p>
+          💌
+          <span style="color: #ff4d6d; font-weight: bold">Hey Cutieee</span>
+          🥺💖, <br /><br />
+
+          I am
+          <span
+            style="
+              background: #ffd6e7;
+              padding: 4px 10px;
+              border-radius: 12px;
+              color: #ff2e63;
+              font-weight: bold;
+            "
+            >sorrieee</span
+          >
+          😔💔. I know I made a lot of mistakes and hurt you, hurting you is
+          becoming a hobby for me 😞, but trust me cutiee 🥺💕 my heart always
+          wants to see your pretty smile 🌸✨.
+
+          <span
+            style="
+              background: #ffe8f0;
+              padding: 5px 12px;
+              border-radius: 14px;
+              color: #ff4d6d;
+              font-weight: bold;
+            "
+          >
+            My heart only knows to love you ❤️ and it will keep on doing it
+            forever 💞
+          </span>
+
+          <br /><br />
+
+          It doesn't have any grudge on you, never wanted to lower you or
+          disrespect you 😣, but don't know because of my stupidity things just
+          happened 💔.
+
+          <span
+            style="
+              background: #fff0c7;
+              padding: 5px 12px;
+              border-radius: 14px;
+              color: #ff7b00;
+              font-weight: bold;
+            "
+          >
+            Trust me I am trying every second to control my eripappanessss and
+            clumsyness 🥹✨
+          </span>
+
+          and soon I will definitely control it 🌷.
+
+          <br /><br />
+
+          🌸
+          <span style="color: #ff4d6d; font-weight: bold"
+            >You are the most beautiful part of my life</span
+          >
+          🌸, and seeing you upset because of me hurts more than anything 😔💔.
+          If I could take back every sad moment, I would do it instantly ⏳💞.
+
+          <br /><br />
+
+          Keerthuuu 🥺💖, I consider my cuteee auntiee 👩‍👧 as my mom and Jashuva
+          🤍 as my brother. Just think naa that why would I intentionally do
+          anything to hurt the precious person who means everything to them and
+          to me as well 😭❤️.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #ffd6ec;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #e6005c;
+              font-weight: bold;
+            "
+          >
+            I loveeee youuuu more than I love my mom ❤️🥺
+          </span>
+
+          <br /><br />
+
+          <span
+            style="
+              background: #ffe7d1;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff5c00;
+              font-weight: bold;
+            "
+          >
+            I respect you more than my own self-respect 🌎💖
+          </span>
+
+          <br /><br />
+
+          I want to stay close to you forever 🤍, want to stay constant in your
+          life 🌷, want to do things for you 🎁, want to arrange celebrations
+          for you 🎂✨, want to cook for you 🍜💖, want to click pictures and
+          videos for you 📸🎥.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #ffe3f2;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff2e63;
+              font-weight: bold;
+            "
+          >
+            You are everything to me 💞
+          </span>
+
+          🥺❤️ You are my life 🌍, the breath that I take everyday 🌬️, the dream
+          that comes into my mind and helps me sleep everyday 🌙✨, the cutesttt
+          friend whose smile predicts my entire day 🌸💖.
+
+          <br /><br />
+
+          I am sorrry 😭💔, sorrrry for everything !!
+
+          <br /><br />
+
+          I may not always be perfect 😔, but my feelings for you are real and
+          honest ❤️✨. I do not have any intentions with anyone else ❌💔,
+          neither in your presence nor in your absence.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #fff0d9;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff7b00;
+              font-weight: bold;
+            "
+          >
+            Trust me Chikiriii 🥺, I swear on you, my mom and everyone I truly
+            love ❤️
+          </span>
+
+          and you know naa I will never swear falsely on you 😭💖.
+
+          <br /><br />
+
+          Thank you sooo much 🌸💞 for giving me your and our family's love ❤️,
+          for caring for me 🤗, and for staying beside me even during difficult
+          moments 🫂✨.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #ffdff0;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff006e;
+              font-weight: bold;
+            "
+          >
+            I will always try to stay loyal to this love ❤️
+          </span>
+
+          <br /><br />
+
+          I will never let you down 😭💖. How can I let you down when your smile
+          makes me smile 🌸😊 and your tears make me cry too 😢💔.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #ffe4ea;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff2e63;
+              font-weight: bold;
+            "
+          >
+            No one is even close to you in my priority list ❤️🌍
+          </span>
+
+          (not even my mom 🥺), because I love you the most 💞✨.
+
+          <br /><br />
+
+          I just want your smile back again 🌸😊. Please forgive me 💌 and let
+          us create more happy memories together ✨🌈. More trips ✈️, more fun
+          🎡, and more happy moments 💖 forever.
+
+          <br /><br />
+
+          Please consider this apology letter 🥺💌 from your bestest friend who
+          loves you endlessly ❤️, without expecting the same from your side 🤍,
+          who will always stand with you 🫂, and who will fight with the whole
+          world just for your happiness 🌎💖.
+
+          <br /><br />
+
+          <span
+            style="
+              background: #fff0c7;
+              padding: 6px 14px;
+              border-radius: 14px;
+              color: #ff7b00;
+              font-weight: bold;
+            "
+          >
+            Waiting for your call Keerthuuu 📞🥺
+          </span>
+
+          <br /><br />
+
+          Please call me once whenever you are free 😭💖. My ears are literally
+          waiting for your voice 🎧✨ and my eyes are waiting to see you again
+          👀💞.
+
+          <br /><br />
+
+          🌸💌
+          <span style="color: #ff2e63; font-weight: bold"
+            >Please forgive me my dearest bestoooo</span
+          >
+          🥺❤️
+        </p>
+
+        <div class="love">Forever Yours 💖</div>
+      </div>
+    </div>
+
+    <script>
+      let isPlaying = false;
+
+      /* Open Envelope */
+
+      function openLetter() {
+        document.getElementById("container").classList.add("open");
+      }
+
+      /* Close Letter */
+
+      function closeLetter() {
+        document.getElementById("container").classList.remove("open");
+      }
+
+      /* Play Pause Music */
+
+      function toggleMusic() {
+        const music = document.getElementById("bgMusic");
+
+        const musicBtn = document.querySelector(".music-btn");
+
+        music.volume = 0.4;
+
+        if (!isPlaying) {
+          music.play();
+
+          musicBtn.innerHTML = "⏸ Pause Music";
+
+          isPlaying = true;
+        } else {
+          music.pause();
+
+          musicBtn.innerHTML = "🎵 Play Music";
+
+          isPlaying = false;
+        }
+      }
+    </script>
+    <audio id="bgMusic" loop>
+      <source src="./love.mp3" type="audio/mp3" />
+    </audio>
+  </body>
+</html>
